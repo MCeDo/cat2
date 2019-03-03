@@ -1,0 +1,31 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: cat2-gateway
+  profiles:
+    active: dev
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启基于服务发现路由规则
+          lower-case-service-id: true # 小写的服务名称
+
+--- #dev环境
+spring:
+  profiles: dev
+  cloud:
+#    config:
+#      uri: http://servercenter:8001/config
+#      discovery:
+#        enabled: true
+#        com.cedo.service-id: sys-servercenter # 配置中心的servieId，即服务名
+      label: master
+      profile: dev
+      fail-fast: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka

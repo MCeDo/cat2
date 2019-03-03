@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cedo.cat2auth.dao.MenuMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.cedo.cat2auth.model.Menu" id="menuMap">
+        <result property="id" jdbcType="INTEGER" column="id"/>
+        <result property="name" jdbcType="VARCHAR" column="name"/>
+        <result property="permission" jdbcType="VARCHAR" column="permission"/>
+        <result property="parentId" jdbcType="INTEGER" column="parent_id"/>
+        <result property="path" jdbcType="VARCHAR" column="path"/>
+        <result property="compent" jdbcType="VARCHAR" column="compent"/>
+        <result property="sort" jdbcType="INTEGER" column="sort"/>
+        <result property="type" jdbcType="INTEGER" column="type"/>
+        <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
+        <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
+        <result property="delFlag" jdbcType="VARCHAR" column="del_flag"/>
+    </resultMap>
+
+    <select id="findMenuByUserId" resultMap="menuMap" parameterType="Long">
+        select permission
+        from menu m
+        where m.id in (
+          select menu_id from role_menu rm
+            inner join user u on u.id=#{userId} and u.role_id= rm.role_id
+          );
+    </select>
+
+    <select id="findAll" resultMap="menuMap">
+        select permission from menu where type=1
+    </select>
+
+
+</mapper>

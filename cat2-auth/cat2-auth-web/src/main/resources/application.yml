@@ -1,0 +1,81 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: cat2-auth
+  profiles:
+    active: dev
+
+--- #dev环境
+spring:
+  profiles: dev
+  cloud:
+    #    config:
+    #      uri: http://servercenter:8001/config
+    #      discovery:
+    #        enabled: true
+    #        com.cedo.service-id: sys-servercenter # 配置中心的servieId，即服务名
+    label: master
+    profile: dev
+    fail-fast: true
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/trade?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
+      username: root
+      password: root
+#      filters: stat,wall,log4j,config
+      max-active: 100
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+#      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.cedo.cat2auth.model
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 2
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+    #序列接口实现类配置  当用oracle时主键是序列的话，刚id-type为1
+    #key-generator: com.baomidou.mybatisplus.incrementer.OracleKeyGenerator
+    #逻辑删除配置
+    logic-delete-value: -1
+    logic-not-delete-value: 0
+    #自定义填充策略接口实现
+    #meta-object-handler: com.baomidou.springboot.xxx
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka

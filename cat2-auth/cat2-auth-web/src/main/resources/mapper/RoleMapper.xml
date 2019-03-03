@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cedo.cat2auth.dao.RoleMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.cedo.cat2auth.model.Role" id="roleMap">
+        <result property="id" jdbcType="INTEGER" column="id"/>
+        <result property="name" jdbcType="VARCHAR" column="name"/>
+        <result property="desc" jdbcType="VARCHAR" column="desc"/>
+        <result property="delFalg" jdbcType="VARCHAR" column="del_falg"/>
+    </resultMap>
+
+
+</mapper>
