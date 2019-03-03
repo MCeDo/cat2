@@ -6,12 +6,11 @@ spring:
     name: cat2-gateway
   profiles:
     active: dev
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true #开启基于服务发现路由规则
-          lower-case-service-id: true # 小写的服务名称
+zuul:
+  routes:
+    cat2-auth:
+      path: /auth/**
+      serviceId: CAT2-AUTH
 
 --- #dev环境
 spring:

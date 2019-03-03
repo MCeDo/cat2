@@ -1,7 +1,11 @@
 package com.cedo.common.http;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 返回结果封装
@@ -58,6 +62,16 @@ public class HttpResult {
         HttpResult result = new HttpResult();
         result.setData(data);
         result.setMsg(msg);
+        return result;
+    }
+
+    public static HttpResult ok(String msg, Object data, Page page) {
+        HttpResult result = new HttpResult();
+        result.setMsg(msg);
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", data);
+        map.put("page", page);
+        result.setData(map);
         return result;
     }
 
