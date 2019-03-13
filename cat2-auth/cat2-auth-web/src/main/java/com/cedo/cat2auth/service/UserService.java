@@ -14,9 +14,19 @@ public interface UserService {
 
     HttpResult logout(String token);
 
-    User findUserByAccount(String account);
+    User findUserByUsername(String account);
 
     void findPermission(Long id);
 
     HttpResult register(User user);
+
+    HttpResult findUserById(Long id);
+
+    HttpResult add(User user);
+
+    HttpResult update(User user);
+
+    HttpResult list(Integer current, Integer size);
+
+    HttpResult delete(Long id);
 }

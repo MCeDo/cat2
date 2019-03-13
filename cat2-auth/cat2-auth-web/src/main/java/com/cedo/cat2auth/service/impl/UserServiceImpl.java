@@ -2,6 +2,8 @@ package com.cedo.cat2auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cedo.cat2auth.dao.UserMapper;
 import com.cedo.cat2auth.dto.LoginDTO;
 import com.cedo.cat2auth.model.Menu;
@@ -16,7 +18,6 @@ import com.cedo.common.util.MathUtil;
 import com.cedo.redis.RedisKeys;
 import com.cedo.redis.RedisUtil;
 import com.cedo.security.vo.UserToken;
-import com.netflix.discovery.converters.Auto;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,9 +49,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public HttpResult login(LoginDTO loginDTO) {
-        User user = this.findUserByAccount(loginDTO.getAccount());
-        String confirm = sha256Hash(loginDTO.getPassword(), user.getSalt());
-        if (user==null || !user.getPassword().equals(confirm)) {
+        User user = this.findUserByUsername(loginDTO.getUsername());
+        if (user==null || !user.getPassword().equals(sha256Hash(loginDTO.getPassword(), user.getSalt()))) {
             throw new RestException(HttpStatus.UNAUTHORIZED.value(), "帐号或者密码错误");
         }
         // 创建token
@@ -69,9 +69,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByAccount(String account) {
+    public User findUserByUsername(String username) {
         Wrapper<User> wrapper = new QueryWrapper<>();
-        ((QueryWrapper<User>) wrapper).eq("account", account);
+        ((QueryWrapper<User>) wrapper).eq("username", username);
         return userMapper.selectOne(wrapper);
     }
 
@@ -100,6 +100,44 @@ public class UserServiceImpl implements UserService {
         return userMapper.insert(user)>0
                 ? HttpResult.ok("注册成功哥")
                 : HttpResult.error("注册失败！请重新注册");
+    }
+
+    @Override
+    public HttpResult findUserById(Long id) {
+        User user = userMapper.selectById(id);
+        if (user == null) {
+            throw new RestException(HttpStatus.NOT_FOUND.value(), "用户不存在");
+        }
+        return HttpResult.ok(user);
+    }
+
+    @Override
+    public HttpResult add(User user) {
+        int insert = userMapper.insert(user);
+        return insert>0
+                ?HttpResult.ok("添加成功")
+                :HttpResult.error("添加失败！");
+    }
+
+    @Override
+    public HttpResult update(User user) {
+        return userMapper.updateById(user)>0
+                ?HttpResult.ok("修改成功")
+                :HttpResult.error("修改失败");
+    }
+
+    @Override
+    public HttpResult list(Integer current, Integer size) {
+        IPage page = new Page(current, size);
+        Wrapper<User> wrapper = new QueryWrapper<>();
+        IPage list = userMapper.selectPage(page, wrapper);
+        return HttpResult.ok("包含分页的数据", list);
+    }
+
+    @Override
+    public HttpResult delete(Long id) {
+        int count = userMapper.deleteById(id);
+        return HttpResult.ok("删除成功");
     }
 
     /**

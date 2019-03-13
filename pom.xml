@@ -73,8 +73,6 @@
         </dependencies>
     </dependencyManagement>
 
-
-
     <repositories>
         <repository>
             <id>spring-milestones</id>

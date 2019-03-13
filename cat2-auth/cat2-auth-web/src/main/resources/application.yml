@@ -74,8 +74,10 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8001/eureka
+debug: true

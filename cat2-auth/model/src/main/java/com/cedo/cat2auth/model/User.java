@@ -22,14 +22,13 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId
-    @JSONField(serializeUsing = ToStringSerializer.class)
     @ApiModelProperty(value = "ID", example = "1")
     private Long id;
 
     @ApiModelProperty(value = "帐号（手机号码）", example = "1356000000")
     @Length(message="手机号码格式错误", max = 12, groups = {AddGroup.class ,  UpdateGroup.class})
     @NotBlank(message="手机号码不能为空", groups = {AddGroup.class ,  UpdateGroup.class})
-    private String account;
+    private String username;
 
     @ApiModelProperty(value = "密码", example = "123456")
     @NotBlank(message="密码不能为空", groups = {AddGroup.class ,  UpdateGroup.class})
@@ -38,7 +37,7 @@ public class User implements Serializable {
     @ApiModelProperty(value = "用户昵称", example = "昵称001")
     @Length(message="用户昵称不能超过16个字符", max = 16, groups = {AddGroup.class ,  UpdateGroup.class})
     @NotBlank(message="用户昵称不能为空", groups = {AddGroup.class ,  UpdateGroup.class})
-    private String username;
+    private String nickname;
 
     private String salt;
     private Integer roleId;
@@ -54,7 +53,7 @@ public class User implements Serializable {
      */
     @ApiModelProperty(value = "头像", example = "测试头像001")
     @Length(message="头像不能超过255个字符", max = 255, groups = {AddGroup.class ,  UpdateGroup.class})
-    private String avatar;
+    private String avator;
     /**
      * 邮箱
      */
