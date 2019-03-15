@@ -5,6 +5,7 @@ import com.alibaba.fastjson.serializer.ToStringSerializer;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.cedo.common.validator.AddGroup;
 import com.cedo.common.validator.UpdateGroup;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -17,6 +18,7 @@ import java.io.Serializable;
  * @date 19-2-28 下午4:55
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;

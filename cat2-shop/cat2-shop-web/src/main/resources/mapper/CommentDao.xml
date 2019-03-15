@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cedo.cat2shop.dao.CommentDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.cedo.cat2shop.model.Comment" id="commentMap">
+        <result property="id" jdbcType="INTEGER" column="id"/>
+        <result property="userId" jdbcType="INTEGER" column="user_id"/>
+        <result property="username" jdbcType="VARCHAR" column="username"/>
+        <result property="content" jdbcType="VARCHAR" column="content"/>
+        <result property="productId" jdbcType="INTEGER" column="product_id"/>
+        <result property="createdTime" jdbcType="TIMESTAMP" column="created_time"/>
+        <result property="replyId" jdbcType="INTEGER" column="reply_id"/>
+        <result property="replyName" jdbcType="VARCHAR" column="reply_name"/>
+    </resultMap>
+
+
+</mapper>

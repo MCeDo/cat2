@@ -1,5 +1,6 @@
-package com.cedo.cat2auth.service;
+package com.cedo.cat2auth.client.service;
 
+import com.cedo.cat2auth.client.dao.UserMapper;
 import com.cedo.cat2auth.model.User;
 import com.cedo.redis.RedisKeys;
 import com.cedo.redis.RedisUtil;

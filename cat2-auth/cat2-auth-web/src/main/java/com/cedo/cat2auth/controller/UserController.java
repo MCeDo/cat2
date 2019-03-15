@@ -4,11 +4,15 @@ import com.cedo.cat2auth.model.User;
 import com.cedo.cat2auth.service.UserService;
 import com.cedo.common.http.HttpResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.Map;
 
 /**
  * @Author chendong
@@ -53,7 +57,12 @@ public class UserController {
 
     @GetMapping
     @RequiresPermissions("user:list")
-    public HttpResult list(@RequestParam Integer current, @RequestParam Integer size) {
-        return userService.list(current, size);
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "页码", paramType = "query", required = true, defaultValue = "0"),
+            @ApiImplicitParam(name = "limit", value = "每页条数", paramType = "query", required = true, defaultValue = "10"),
+            @ApiImplicitParam(name = "type", value = "角色ID", paramType = "query", defaultValue = "1")
+    })
+    public HttpResult list(@ApiIgnore @RequestParam Map<String, Object> params) {
+        return userService.list(params);
     }
 }

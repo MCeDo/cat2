@@ -23,10 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author chendong
@@ -55,6 +52,8 @@ public class UserServiceImpl implements UserService {
         }
         // 创建token
         UserToken userToken = userTokenService.createToken(user.getId());
+        //将用户数据放redis
+        redisUtil.set(RedisKeys.getUserById(user.getId()), user);
         // 查出权限放到redis缓存
         this.findPermission(user.getId());
         return HttpResult.ok(userToken);
@@ -113,6 +112,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public HttpResult add(User user) {
+        user.setSalt(MathUtil.random());
         int insert = userMapper.insert(user);
         return insert>0
                 ?HttpResult.ok("添加成功")
@@ -127,9 +127,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public HttpResult list(Integer current, Integer size) {
-        IPage page = new Page(current, size);
-        Wrapper<User> wrapper = new QueryWrapper<>();
+    public HttpResult list(Map<String, Object> params) {
+        Integer current = Integer.valueOf((String)params.get("page"));
+        Integer limit = Integer.valueOf((String)params.get("limit"));
+        IPage page = new Page(current, limit);
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("role_id", params.get("type")==null?1:params.get("type"));
         IPage list = userMapper.selectPage(page, wrapper);
         return HttpResult.ok("包含分页的数据", list);
     }

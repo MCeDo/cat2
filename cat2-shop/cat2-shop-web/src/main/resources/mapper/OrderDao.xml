@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cedo.cat2shop.dao.OrderDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.cedo.cat2shop.model.Order" id="orderMap">
+        <result property="id" jdbcType="INTEGER" column="id"/>
+        <result property="productId" jdbcType="INTEGER" column="product_id"/>
+        <result property="productName" jdbcType="VARCHAR" column="product_name"/>
+        <result property="count" jdbcType="BOOLEAN" column="count"/>
+        <result property="price" jdbcType="INTEGER" column="price"/>
+        <result property="totalPrice" jdbcType="INTEGER" column="total_price"/>
+        <result property="userId" jdbcType="INTEGER" column="user_id"/>
+        <result property="consignee" jdbcType="VARCHAR" column="consignee"/>
+        <result property="phone" jdbcType="VARCHAR" column="phone"/>
+        <result property="pay" jdbcType="VARCHAR" column="pay"/>
+        <result property="delivery" jdbcType="VARCHAR" column="delivery"/>
+        <result property="address" jdbcType="VARCHAR" column="address"/>
+        <result property="confirm" jdbcType="VARCHAR" column="confirm"/>
+        <result property="createdTime" jdbcType="TIMESTAMP" column="created_time"/>
+        <result property="paidTime" jdbcType="TIMESTAMP" column="paid_time"/>
+        <result property="deliveryTime" jdbcType="TIMESTAMP" column="delivery_time"/>
+        <result property="confirmTime" jdbcType="TIMESTAMP" column="confirm_time"/>
+        <result property="postalCode" jdbcType="VARCHAR" column="postal_code"/>
+    </resultMap>
+
+
+</mapper>

@@ -4,6 +4,8 @@ import com.cedo.cat2auth.dto.LoginDTO;
 import com.cedo.cat2auth.model.User;
 import com.cedo.common.http.HttpResult;
 
+import java.util.Map;
+
 /**
  * @Author chendong
  * @date 19-3-1 下午12:38
@@ -26,7 +28,7 @@ public interface UserService {
 
     HttpResult update(User user);
 
-    HttpResult list(Integer current, Integer size);
+    HttpResult list(Map<String, Object> params);
 
     HttpResult delete(Long id);
 }
