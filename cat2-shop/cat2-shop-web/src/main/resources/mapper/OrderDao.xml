@@ -7,8 +7,8 @@
     <resultMap type="com.cedo.cat2shop.model.Order" id="orderMap">
         <result property="id" jdbcType="INTEGER" column="id"/>
         <result property="productId" jdbcType="INTEGER" column="product_id"/>
+        <result property="count" jdbcType="INTEGER" column="count"/>
         <result property="productName" jdbcType="VARCHAR" column="product_name"/>
-        <result property="count" jdbcType="BOOLEAN" column="count"/>
         <result property="price" jdbcType="INTEGER" column="price"/>
         <result property="totalPrice" jdbcType="INTEGER" column="total_price"/>
         <result property="userId" jdbcType="INTEGER" column="user_id"/>

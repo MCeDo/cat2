@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class BaseController<T> {
 
     @Autowired
-    private BaseDao baseDao;
+    private BaseDao<T> baseDao;
 
     @GetMapping
     public HttpResult list(@RequestParam(defaultValue = "0")Integer page, @RequestParam(defaultValue = "10") Integer limit) {
@@ -29,7 +29,7 @@ public class BaseController<T> {
         return HttpResult.ok(pageList);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public HttpResult get(@PathVariable Long id) {
         return HttpResult.ok(baseDao.selectById(id));
     }

@@ -80,7 +80,7 @@ public class Product implements Serializable {
     @ApiModelProperty(value = "物品描述", example = "测试物品描述001")
     @Length(message="物品描述不能超过255个字符", max = 255, groups = {AddGroup.class ,  UpdateGroup.class})
     @NotBlank(message="物品描述不能为空", groups = {AddGroup.class ,  UpdateGroup.class})
-    private String desc;
+    private String description;
 	/**
 	 * 物品标题
 	 */
@@ -93,7 +93,7 @@ public class Product implements Serializable {
 	 */
     @ApiModelProperty(value = "几成新", example = "true")
     @NotNull(message="几成新不能为空", groups = {AddGroup.class ,  UpdateGroup.class})
-    private Boolean newLevel;
+    private Integer newLevel;
 	/**
 	 * 是否议价（0否 1是）
 	 */

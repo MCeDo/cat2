@@ -3,6 +3,7 @@ package com.cedo.cat2shop.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cedo.cat2shop.model.Product;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 /**
  * 闲置物品
@@ -12,6 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2019-03-02 20:39:40
  */
 @Mapper
+@Component
 public interface ProductDao extends BaseMapper<Product> {
 	
 }

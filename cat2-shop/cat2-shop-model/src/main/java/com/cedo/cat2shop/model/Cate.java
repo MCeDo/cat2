@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * 分类
@@ -38,4 +39,10 @@ public class Cate implements Serializable {
     @Length(message="类别名称不能超过255个字符", max = 255, groups = {AddGroup.class ,  UpdateGroup.class})
     @NotBlank(message="类别名称不能为空", groups = {AddGroup.class ,  UpdateGroup.class})
     private String name;
+
+    @ApiModelProperty(value = "图片url", example = "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80")
+    @NotBlank(message = "请上传图片", groups = {AddGroup.class, UpdateGroup.class})
+    private String url;
+
+    private Timestamp createdTime;
 }

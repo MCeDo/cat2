@@ -21,7 +21,7 @@ import java.io.Serializable;
  * @author chendong
  * @date 2019-03-02 20:40:25
  */
-@TableName("order")
+@TableName("orders")
 @ApiModel(description = "订单")
 @Data
 public class Order implements Serializable {
@@ -51,7 +51,7 @@ public class Order implements Serializable {
 	 * 物品数量
 	 */
     @ApiModelProperty(value = "物品数量", example = "true")
-    private Boolean count;
+    private Integer count;
 	/**
 	 * 物品单价
 	 */

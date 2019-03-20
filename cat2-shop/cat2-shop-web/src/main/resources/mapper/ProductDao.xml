@@ -12,9 +12,9 @@
         <result property="userId" jdbcType="INTEGER" column="user_id"/>
         <result property="username" jdbcType="VARCHAR" column="username"/>
         <result property="school" jdbcType="VARCHAR" column="school"/>
-        <result property="desc" jdbcType="VARCHAR" column="desc"/>
+        <result property="description" jdbcType="VARCHAR" column="description"/>
         <result property="title" jdbcType="VARCHAR" column="title"/>
-        <result property="newLevel" jdbcType="BOOLEAN" column="new_level"/>
+        <result property="newLevel" jdbcType="INTEGER" column="new_level"/>
         <result property="bahrain" jdbcType="VARCHAR" column="bahrain"/>
         <result property="price" jdbcType="INTEGER" column="price"/>
         <result property="address" jdbcType="VARCHAR" column="address"/>

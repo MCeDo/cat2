@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/shop/cate")
-public class CateController extends BaseController<Cate>{
-/*
+//public class CateController extends BaseController<Cate>{
+public class CateController {
     @Autowired
     private CateService cateService;
 
@@ -37,5 +37,5 @@ public class CateController extends BaseController<Cate>{
     @PutMapping
     public HttpResult update(@RequestBody Cate cate) {
         return cateService.update(cate);
-    }*/
+    }
 }
