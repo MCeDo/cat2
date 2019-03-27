@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.com.do1.dsf.modules.other.dao.ProductDao">
+<mapper namespace="com.cedo.cat2shop.dao.ProductDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.cedo.cat2shop.model.Product" id="productMap">
@@ -20,7 +20,21 @@
         <result property="address" jdbcType="VARCHAR" column="address"/>
         <result property="createdTime" jdbcType="TIMESTAMP" column="created_time"/>
         <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
+        <collection property="images" ofType="com.cedo.cat2shop.model.ProductPic">
+            <result column="pic_id" property="id"/>
+            <result column="product_id" property="productId"/>
+            <result column="pic_url" property="picUrl"/>
+        </collection>
     </resultMap>
 
+    <select id="selectPageWithImages" resultMap="productMap">
+        select * from product p
+          left join product_pic pp on p.id = pp.product_id
+        <where>
+            <if test="params.name!=null and params.name!=''">and name like #{params.name}</if>
+            <if test="params.cate!=null and params.cate!=''">and cate_id = #{params.cate}</if>
+        </where>
+          order by p.created_time desc
+    </select>
 
 </mapper>
