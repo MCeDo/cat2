@@ -39,7 +39,7 @@ public class ProductPic implements Serializable {
 	 */
     @ApiModelProperty(value = "物品ID", example = "1")
     @NotNull(message="物品ID不能为空", groups = {AddGroup.class ,  UpdateGroup.class})
-    private Integer productId;
+    private Long productId;
 	/**
 	 * 图片URL
 	 */
