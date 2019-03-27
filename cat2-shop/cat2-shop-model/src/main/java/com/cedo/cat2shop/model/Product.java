@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 闲置物品
@@ -125,4 +126,9 @@ public class Product implements Serializable {
 	 */
     @ApiModelProperty(value = "最后修改时间", example = "2018-08-08")
     private Date updateTime;
+
+    /**
+     * 物品图片
+     */
+    private transient List<ProductPic> images;
 }
