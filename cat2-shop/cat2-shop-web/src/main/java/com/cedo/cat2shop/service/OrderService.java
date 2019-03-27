@@ -17,4 +17,6 @@ public interface OrderService {
     HttpResult add(Order order);
 
     HttpResult update(Order order);
+
+    HttpResult delete(Long id);
 }

@@ -18,4 +18,6 @@ public interface ProductService {
     HttpResult add(Product product);
 
     HttpResult update(Product product);
+
+    HttpResult delete(Long id);
 }

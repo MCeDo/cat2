@@ -16,4 +16,8 @@ public interface CateService {
     HttpResult add(Cate cate);
 
     HttpResult update(Cate cate);
+
+    HttpResult delete(Long id);
+
+    String findCateNameById(Integer cateId);
 }

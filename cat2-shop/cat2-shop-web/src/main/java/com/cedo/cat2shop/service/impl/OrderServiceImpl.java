@@ -48,4 +48,11 @@ public class OrderServiceImpl implements OrderService {
                 ?HttpResult.ok("修改成功")
                 :HttpResult.error("修改失败");
     }
+
+    @Override
+    public HttpResult delete(Long id) {
+        return orderDao.deleteById(id) > 0
+                ?HttpResult.ok("删除成功")
+                :HttpResult.error("删除失败");
+    }
 }

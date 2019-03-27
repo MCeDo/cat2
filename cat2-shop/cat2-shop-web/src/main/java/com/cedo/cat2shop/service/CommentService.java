@@ -15,4 +15,6 @@ public interface CommentService {
     HttpResult add(Comment comment);
 
     HttpResult update(Comment comment);
+
+    HttpResult delete(Long id);
 }

@@ -11,6 +11,8 @@ import com.cedo.common.http.HttpResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 /**
  * @Author chendong
  * @date 19-3-13 下午7:33
@@ -36,6 +38,7 @@ public class CateServiceImpl implements CateService {
 
     @Override
     public HttpResult add(Cate cate) {
+        cate.setCreatedTime(new Timestamp(System.currentTimeMillis()));
         return cateDao.insert(cate)>0
                 ?HttpResult.ok("添加成功")
                 :HttpResult.error("添加失败");
@@ -46,5 +49,17 @@ public class CateServiceImpl implements CateService {
         return cateDao.updateById(cate)>0
                 ?HttpResult.ok("修改成功")
                 :HttpResult.error("修改失败");
+    }
+
+    @Override
+    public HttpResult delete(Long id) {
+        return cateDao.deleteById(id) > 0
+                ?HttpResult.ok("删除成功")
+                :HttpResult.error("删除失败");
+    }
+
+    @Override
+    public String findCateNameById(Integer cateId) {
+        return cateDao.findCateNameById(cateId);
     }
 }
