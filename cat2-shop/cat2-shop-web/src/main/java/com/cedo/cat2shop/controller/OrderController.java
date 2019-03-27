@@ -46,4 +46,9 @@ public class OrderController {
     public HttpResult update(@RequestBody Order order) {
         return orderService.update(order);
     }
+
+    @DeleteMapping("/{id}")
+    public HttpResult delete(@PathVariable Long id) {
+        return orderService.delete(id);
+    }
 }

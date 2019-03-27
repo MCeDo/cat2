@@ -5,7 +5,10 @@ import com.cedo.cat2shop.dao.BaseDao;
 import com.cedo.cat2shop.model.Cate;
 import com.cedo.cat2shop.service.CateService;
 import com.cedo.common.http.HttpResult;
+import com.cedo.common.validator.AddGroup;
+import com.cedo.common.validator.UpdateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
  * @date 19-3-13 下午4:08
  */
 @RestController
-@RequestMapping("/shop/cate")
+@RequestMapping("/cate")
 //public class CateController extends BaseController<Cate>{
 public class CateController {
     @Autowired
     private CateService cateService;
 
     @GetMapping
-    public HttpResult list(@RequestParam(defaultValue = "0") Integer current, @RequestParam(defaultValue = "10") Integer size) {
+    public HttpResult list(@RequestParam(defaultValue = "0") Integer current, @RequestParam(defaultValue = "100") Integer size) {
         return cateService.list(current, size);
     }
 
@@ -30,12 +33,17 @@ public class CateController {
     }
 
     @PostMapping
-    public HttpResult add(@RequestBody Cate cate) {
+    public HttpResult add(@RequestBody @Validated(AddGroup.class) Cate cate) {
         return cateService.add(cate);
     }
 
     @PutMapping
-    public HttpResult update(@RequestBody Cate cate) {
+    public HttpResult update(@RequestBody @Validated(UpdateGroup.class) Cate cate) {
         return cateService.update(cate);
+    }
+
+    @DeleteMapping("/{id}")
+    public HttpResult delete(@PathVariable Long id) {
+        return cateService.delete(id);
     }
 }

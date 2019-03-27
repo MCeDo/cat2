@@ -36,4 +36,9 @@ public class CommentController {
     public HttpResult update(@RequestBody Comment comment) {
         return commentService.update(comment);
     }
+
+    @DeleteMapping("/{id}")
+    public HttpResult delete(@PathVariable Long id) {
+        return commentService.delete(id);
+    }
 }

@@ -1,6 +1,7 @@
 package com.cedo.cat2shop.controller;
 
 import com.cedo.cat2shop.model.Product;
+import com.cedo.cat2shop.model.ProductPic;
 import com.cedo.cat2shop.service.ProductService;
 import com.cedo.common.http.HttpResult;
 import io.swagger.annotations.ApiImplicitParam;
@@ -26,7 +27,7 @@ public class ProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "页码", paramType = "query", required = true, defaultValue = "0"),
             @ApiImplicitParam(name = "limit", value = "每页条数", paramType = "query", required = true, defaultValue = "10"),
-            @ApiImplicitParam(name = "pay", value = "是否支付", paramType = "query")
+            @ApiImplicitParam(name = "cate", value = "类别ID", paramType = "query", required = false)
     })
     public HttpResult list(@ApiIgnore @RequestParam Map<String, Object> params) {
         return productService.list(params);
@@ -45,5 +46,16 @@ public class ProductController {
     @PutMapping
     public HttpResult update(@RequestBody Product product) {
         return productService.update(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public HttpResult delete(@PathVariable Long id) {
+        return productService.delete(id);
+    }
+
+    @PostMapping("/pic")
+    public HttpResult uploadPic(@RequestBody ProductPic productPic) {
+        System.out.println(productPic.getProductId()+":"+productPic.getPicUrl());
+        return HttpResult.ok(11);
     }
 }
