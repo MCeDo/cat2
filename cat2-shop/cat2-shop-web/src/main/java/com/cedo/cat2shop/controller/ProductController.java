@@ -2,6 +2,7 @@ package com.cedo.cat2shop.controller;
 
 import com.cedo.cat2shop.model.Product;
 import com.cedo.cat2shop.model.ProductPic;
+import com.cedo.cat2shop.service.ProductPicService;
 import com.cedo.cat2shop.service.ProductService;
 import com.cedo.common.http.HttpResult;
 import io.swagger.annotations.ApiImplicitParam;
@@ -22,6 +23,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductPicService productPicService;
 
     @GetMapping
     @ApiImplicitParams({
@@ -55,7 +59,11 @@ public class ProductController {
 
     @PostMapping("/pic")
     public HttpResult uploadPic(@RequestBody ProductPic productPic) {
-        System.out.println(productPic.getProductId()+":"+productPic.getPicUrl());
-        return HttpResult.ok(11);
+        return productPicService.addProductPic(productPic);
+    }
+
+    @DeleteMapping("/pic/{id}")
+    public HttpResult deletePic(@PathVariable Long id) {
+        return productPicService.delete(id);
     }
 }
